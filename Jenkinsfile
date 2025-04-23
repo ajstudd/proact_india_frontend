@@ -33,7 +33,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    docker build -t $DOCKERHUB_USERNAME/proactive_frontend:latest .
+                    echo "Building image: $DOCKERHUB_USERNAME/$FRONTEND_IMAGE"
+                    docker build -t $DOCKERHUB_USERNAME/$FRONTEND_IMAGE .
                 '''
             }
         }
