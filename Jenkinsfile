@@ -28,10 +28,13 @@ pipeline {
                 writeFile file: '.env', text: 'NEXT_PUBLIC_API_URL=http://141.148.194.201:8515/api'
             }
         }
+        
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB_USERNAME/proactive_frontend:latest .'
+                sh '''
+                    docker build -t $DOCKERHUB_USERNAME/proactive_frontend:latest .
+                '''
             }
         }
 
