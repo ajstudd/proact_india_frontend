@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USERNAME = ''
         DOCKERHUB_PASSWORD = ''
+        DOCKERHUB_USERNAME = 'ajxdoc'
+        FRONTEND_IMAGE = 'proactive_frontend:latest'
     }
 
     stages {
