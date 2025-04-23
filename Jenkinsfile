@@ -29,7 +29,6 @@ pipeline {
                 writeFile file: '.env', text: 'NEXT_PUBLIC_API_URL=http://141.148.194.201:8515/api'
             }
         }
-        
 
         stage('Build Docker Image') {
             steps {
@@ -46,21 +45,17 @@ pipeline {
             }
         }
 
-        stage('Deploy to Oracle Server') {
+        stage('Deploy Locally (Oracle)') {
             steps {
-                sshagent(credentials: ['oracle-ssh']) {
-                    sh '''
-                        ssh -o StrictHostKeyChecking=no junaid@141.148.194.201 << EOF
-                        docker pull $DOCKERHUB_USERNAME/proactive_frontend:latest
-                        docker stop proactive_frontend || true
-                        docker rm proactive_frontend || true
-                        docker run -d --name proactive_frontend -p 3000:3000 \
-                            -e NEXT_PUBLIC_API_URL=http://141.148.194.201:8515/api \
-                            $DOCKERHUB_USERNAME/proactive_frontend:latest
-                        docker image prune -f
-                        EOF
-                    '''
-                }
+                sh '''
+                    docker pull $DOCKERHUB_USERNAME/proactive_frontend:latest
+                    docker stop proactive_frontend || true
+                    docker rm proactive_frontend || true
+                    docker run -d --name proactive_frontend -p 3000:3000 \
+                        -e NEXT_PUBLIC_API_URL=http://141.148.194.201:8515/api \
+                        $DOCKERHUB_USERNAME/proactive_frontend:latest
+                    docker image prune -f
+                '''
             }
         }
     }
