@@ -1,0 +1,40 @@
+.toast {
+	position: fixed;
+	top: 10%;
+	z-index: 9999999;
+	max-width: 300px;
+	max-height: 80px;
+	height: 100%;
+	width: 100%;
+	right: 5%;
+	border-radius: 4px;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: medium;
+	cursor: pointer;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+	&.success {
+		background: #44da49;
+		color: white;
+	}
+
+	&.error {
+		background: #eb4134;
+		color: white;
+	}
+
+	&.warning {
+		background: #ffa824;
+		color: white;
+	}
+
+	&.info {
+		background: #C800FF;
+		color: white;
+	}
+
+
+}
